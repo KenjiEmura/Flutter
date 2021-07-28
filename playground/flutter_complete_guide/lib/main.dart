@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 // void main() {
-//   runApp(MyCoolApp());
+//   runApp(MyApp());
 // }
 
-void main() => runApp(MyCoolApp());
+void main() => runApp(MyApp());
 
-class MyCoolApp extends StatelessWidget {
-  var questionIndex = 0;
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  void answerQuestion() {
-    questionIndex++;
-    print(questionIndex);
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex++;
+    });
+    print(_questionIndex);
   }
 
   @override
@@ -28,8 +36,8 @@ class MyCoolApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(questions[questionIndex]),
-            ElevatedButton(onPressed: answerQuestion, child: Text('Answer 1')),
+            Question(questions[_questionIndex]),
+            ElevatedButton(onPressed: _answerQuestion, child: Text('Answer 1')),
             ElevatedButton(onPressed: () {}, child: Text('Answer 2')),
             ElevatedButton(onPressed: () {}, child: Text('Answer 3'))
           ],
