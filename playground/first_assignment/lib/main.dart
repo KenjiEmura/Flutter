@@ -5,6 +5,9 @@
 
 import 'package:flutter/material.dart';
 
+import 'textControl.dart';
+import 'text.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -13,24 +16,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // ...
-  // Here goes the private _variables, function declarations, logic, etc.
-  // ...
+  // Variables, data, etc.
+  bool _textType = true;
+
+  // Functions, getters, etc.
+  void _buttonPressed() {
+    setState(() {
+      _textType = !_textType;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: Text("Kenji's Amazing App!"),
       home: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'AppBar Title goes here',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+        appBar: AppBar(
+          title: Text(
+            'First Assignment',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          body: Center(
-            child: Text('Here goes everything...'),
-          )),
+        ),
+        body: Center(
+          child: Column(children: [
+            TextToDisplay(_textType),
+            TextControl(_buttonPressed),
+          ]),
+        ),
+      ),
     );
   }
 }
