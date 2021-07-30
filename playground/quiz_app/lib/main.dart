@@ -77,6 +77,7 @@ class _MyAppState extends State<MyApp> {
                 selectAnswer: _answerQuestion)
             : Result(_totalScore, _resetQuiz),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
