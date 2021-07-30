@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               width: double.infinity,
@@ -46,7 +46,57 @@ class MyHomePage extends StatelessWidget {
             Column(
               children: [
                 ...transactions
-                    .map((transaction) => Card(child: Text(transaction.title)))
+                    .map(
+                      (transaction) => Card(
+                        elevation: 2,
+                        margin: EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                        child: Row(children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              border: Border.all(
+                                color: Colors.purple,
+                                width: 2,
+                              ),
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 15,
+                            ),
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              transaction.amount.toString(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.purple,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                transaction.title,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                transaction.date.toString(),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          )
+                        ]),
+                      ),
+                    )
                     .toList(),
               ],
             )
