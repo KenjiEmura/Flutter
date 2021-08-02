@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class NewTransaction extends StatefulWidget {
   final Function addTransaction;
 
   NewTransaction(this.addTransaction);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+    print('submitData was pressed');
+    if (enteredTitle.isEmpty || enteredAmount <= 0) return;
+    widget.addTransaction(
+      enteredTitle,
+      enteredAmount,
+    );
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,15 +43,18 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Title'),
               // onChanged: (value) => titleInput = value,
               controller: titleController,
+              onSubmitted: (_) => submitData(),
             ),
             TextField(
               // onChanged: (value) => amountInput = value,
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.send,
+              onSubmitted: (_) => submitData(),
             ),
             TextButton(
-              onPressed: () => addTransaction(
-                  titleController.text, double.parse(amountController.text)),
+              onPressed: submitData,
               child: Text('Add transaction'),
             )
           ],
