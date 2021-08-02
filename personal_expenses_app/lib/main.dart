@@ -10,7 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Kenji's Expenses Tracker",
+      title: "Perosnal Expenses",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amber.shade900,
+      ),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -59,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kenji's Expenses Tracker"),
+        title: Text("Personal Expenses"),
         actions: [
           IconButton(
             onPressed: () => _startAddNewtransaction(context),
