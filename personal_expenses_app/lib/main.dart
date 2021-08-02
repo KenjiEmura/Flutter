@@ -26,6 +26,11 @@ class MyHomePage extends StatelessWidget {
         id: 't3', title: 'Romantic Dinner', amount: 35.2, date: DateTime.now()),
   ];
 
+  // String? titleInput;
+  // String? amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +39,8 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               width: double.infinity,
@@ -43,6 +48,38 @@ class MyHomePage extends StatelessWidget {
                 color: Colors.blue,
                 child: Text('CHART'),
                 elevation: 5,
+              ),
+            ),
+            Card(
+              elevation: 2,
+              margin: EdgeInsets.symmetric(
+                vertical: 5,
+                horizontal: 10,
+              ),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      // onChanged: (value) => titleInput = value,
+                      controller: titleController,
+                    ),
+                    TextField(
+                      // onChanged: (value) => amountInput = value,
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        print(
+                            "Title input: ${titleController.text}\nAmount Input: ${amountController.text}");
+                      },
+                      child: Text('Add transaction'),
+                    )
+                  ],
+                ),
               ),
             ),
             Column(
@@ -60,7 +97,7 @@ class MyHomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
                               border: Border.all(
-                                color: Colors.purple,
+                                color: Colors.blue,
                                 width: 2,
                               ),
                             ),
@@ -74,7 +111,7 @@ class MyHomePage extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: Colors.purple,
+                                color: Colors.blue,
                               ),
                             ),
                           ),
@@ -89,7 +126,7 @@ class MyHomePage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                DateFormat().format(transaction.date),
+                                DateFormat.yMMMd().format(transaction.date),
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),
