@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Perosnal Expenses",
+      title: "健治の経費記録アプリ",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.amber.shade900,
-      ),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.amber.shade900,
+          fontFamily: 'DotGothic'),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -28,8 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', title: "Kenji's shoes", amount: 29.99, date: DateTime.now()),
+    Transaction(id: 't1', title: "健治の靴", amount: 29.99, date: DateTime.now()),
     Transaction(
         id: 't2', title: 'Green Tea', amount: 11.29, date: DateTime.now()),
     Transaction(
@@ -63,7 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Personal Expenses"),
+        title: Text(
+          "健治の経費記録アプリ",
+          // style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             onPressed: () => _startAddNewtransaction(context),
@@ -76,14 +78,14 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('CHART'),
-                elevation: 5,
-              ),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   child: Card(
+            //     color: Colors.blue,
+            //     child: Text('CHART'),
+            //     elevation: 5,
+            //   ),
+            // ),
             TransactionList(_userTransactions)
           ],
         ),
