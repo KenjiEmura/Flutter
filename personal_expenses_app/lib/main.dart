@@ -22,7 +22,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Kenji's Expenses Tracker"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
