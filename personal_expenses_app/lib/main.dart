@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/chart.dart';
 import 'widgets/new_transaction.dart';
 import 'widgets/transaction_list.dart';
 import 'models/transaction.dart';
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "健治の経費記録アプリ",
+      title: "健治の素晴らしい経費記録アプリ",
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
@@ -52,6 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
     //     id: 't3', title: 'Romantic Dinner', amount: 35.2, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((transaction) {
+      return transaction.date
+          .isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final newTransaction = Transaction(
         id: DateTime.now().toString(),
@@ -80,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "健治の経費記録アプリABC",
+          "健治の素晴らしい経費記録アプリ",
         ),
         actions: [
           IconButton(
@@ -94,14 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Container(
-            //   width: double.infinity,
-            //   child: Card(
-            //     color: Colors.blue,
-            //     child: Text('CHART'),
-            //     elevation: 5,
-            //   ),
-            // ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions)
           ],
         ),
