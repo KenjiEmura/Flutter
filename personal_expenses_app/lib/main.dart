@@ -12,9 +12,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "健治の経費記録アプリ",
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor: Colors.amber.shade900,
-          fontFamily: 'DotGothic'),
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amber.shade900,
+        fontFamily: 'OpenSans',
+        appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                    fontFamily: 'Quicksand',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  ),
+                )),
+      ),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -63,8 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "健治の経費記録アプリ",
-          // style: TextStyle(fontWeight: FontWeight.bold),
+          "健治の経費記録アプリABC",
         ),
         actions: [
           IconButton(

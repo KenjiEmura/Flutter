@@ -28,37 +28,30 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      margin: EdgeInsets.symmetric(
-        vertical: 5,
-        horizontal: 10,
-      ),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              // onChanged: (value) => titleInput = value,
-              controller: titleController,
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              // onChanged: (value) => amountInput = value,
-              decoration: InputDecoration(labelText: 'Amount'),
-              controller: amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              textInputAction: TextInputAction.send,
-              onSubmitted: (_) => submitData(),
-            ),
-            TextButton(
-              onPressed: submitData,
-              child: Text('Add transaction'),
-            )
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          TextField(
+            decoration: InputDecoration(labelText: 'Title'),
+            // onChanged: (value) => titleInput = value,
+            controller: titleController,
+            onSubmitted: (_) => submitData(),
+          ),
+          TextField(
+            // onChanged: (value) => amountInput = value,
+            decoration: InputDecoration(labelText: 'Amount'),
+            controller: amountController,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            textInputAction: TextInputAction.send,
+            onSubmitted: (_) => submitData(),
+          ),
+          TextButton(
+            onPressed: submitData,
+            child: Text('Add transaction'),
+          )
+        ],
       ),
     );
   }
