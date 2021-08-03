@@ -76,18 +76,35 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           Container(
             height: 100,
-            child: Text('Item 1 - pretty big!'),
+            child: Text('Item 1'),
             color: Colors.red,
           ),
-          Container(
-            height: 100,
-            child: Text('Item 2'),
-            color: Colors.blue,
+          // Expanded It's the same Flexible, but with
+          // the fit: FlexFit.tight automatically set
+          Expanded(
+            flex:
+                5, // Flex will sum all the 'flex' properties flutter finds (in
+            // this case 5 + 2 = 7) and asign the corresponding fraction of the
+            // avalible space to the current element, in this case 5/7.
+            // This is true even if one of the elements doesn't have the fit
+            // property set to FlexFit.tight, in which case, the value defined
+            // with 'flex' will be distributed as white space between all the
+            // elements.
+            child: Container(
+              width: 500000000, // This is ignored because of the FlexFit.tight
+              height: 100,
+              child: Text('Item 2'),
+              color: Colors.blue,
+            ),
           ),
-          Container(
-            height: 100,
-            child: Text('Item 3'),
-            color: Colors.orange,
+          Flexible(
+            flex: 2,
+            fit: FlexFit.loose,
+            child: Container(
+              height: 100,
+              child: Text('Item 3'),
+              color: Colors.orange,
+            ),
           ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
