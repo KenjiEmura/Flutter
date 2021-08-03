@@ -4,6 +4,7 @@ import 'widgets/chart.dart';
 import 'widgets/new_transaction.dart';
 import 'widgets/transaction_list.dart';
 import 'models/transaction.dart';
+import 'models/transaction_samples.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
         accentColor: Colors.amber.shade900,
+        // errorColor: Colors.red,
         fontFamily: 'OpenSans',
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
@@ -45,13 +47,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    // Transaction(id: 't1', title: "健治の靴", amount: 29.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: 'Green Tea', amount: 11.29, date: DateTime.now()),
-    // Transaction(
-    //     id: 't3', title: 'Romantic Dinner', amount: 35.2, date: DateTime.now()),
-  ];
+  final List<Transaction> _userTransactions = sampleInfo;
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((transaction) {
@@ -60,12 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime date) {
     final newTransaction = Transaction(
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: date);
     setState(() {
       _userTransactions.insert(0, newTransaction);
     });
@@ -81,6 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child: NewTransaction(_addNewTransaction),
           );
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((element) => element.id == id);
+    });
   }
 
   @override
@@ -103,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransactions)
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),

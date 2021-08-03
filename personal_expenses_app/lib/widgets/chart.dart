@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/number_symbols_data.dart';
+import 'dart:math';
 
 import '/widgets/cart_bar.dart';
 import '../models/transaction.dart';
@@ -25,13 +25,14 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum
       };
-    });
+    }).reversed.toList();
   }
 
-  double get totalSpending {
-    return groupedTransactionValues.fold(0.0, (sum, curentData) {
-      return sum + curentData['amount'];
-    });
+  double get maxSpendingDay {
+    return groupedTransactionValues.fold(
+        0.0,
+        (double biggest, current) =>
+            biggest > current['amount'] ? biggest : current['amount']);
   }
 
   @override
@@ -58,9 +59,9 @@ class Chart extends StatelessWidget {
                       child: ChartBar(
                           data['day'],
                           data['amount'],
-                          totalSpending == 0.0
+                          maxSpendingDay == 0.0
                               ? 0.0
-                              : data['amount'] / totalSpending),
+                              : data['amount'] / maxSpendingDay),
                     ))
                 .toList(),
           ),
