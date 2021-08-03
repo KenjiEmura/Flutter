@@ -15,7 +15,7 @@ class TransactionList extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         vertical: 8,
       ),
-      height: 460,
+      height: 620,
       child: transactions.isEmpty
           ? Column(
               children: [
